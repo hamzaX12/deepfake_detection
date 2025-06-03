@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepFake Detector</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated particles background -->
+    <div class="particles-container" id="particles"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h1>DeepFake Detector</h1>
+            <p>Advanced AI-powered deepfake detection. Upload your video and get instant analysis results.</p>
+        </div>
+
+        <!-- Upload Section -->
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-upload"></i> Upload Video File</h2>
+                <p>Drag and drop your video file or click to browse. Supports MP4, AVI, MOV, and WebM formats.</p>
+            </div>
+            <div class="card-content">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <div class="upload-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div>
+                            <p class="upload-text">Drop your video here or click to browse</p>
+                            <p class="upload-subtext">Maximum file size: 500MB</p>
+                        </div>
+                    </div>
+                    <input type="file" id="fileInput" accept="video/*" hidden>
+                </div>
+
+                <!-- Video Preview (hidden initially) -->
+                <div class="video-preview" id="videoPreview" style="display: none;">
+                    <div class="video-info">
+                        <div class="video-details">
+                            <div class="video-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <div>
+                                <p class="video-name" id="videoName"></p>
+                                <p class="video-size" id="videoSize"></p>
+                            </div>
+                        </div>
+                        <button class="remove-btn" id="removeBtn">Remove</button>
+                    </div>
+                    <video id="videoElement" controls></video>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analysis Section (hidden initially) -->
+        <div class="card" id="analysisCard" style="display: none;">
+            <div class="card-header">
+                <h2><i class="fas fa-shield-alt"></i> AI Analysis</h2>
+                <p>Our advanced AI will analyze your video for signs of deepfake manipulation.</p>
+            </div>
+            <div class="card-content">
+                <!-- Loading State -->
+                <div class="loading-section" id="loadingSection" style="display: none;">
+                    <div class="loading-content">
+                        <div class="spinner"></div>
+                        <span>Analyzing video...</span>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <p class="progress-text" id="progressText">0% Complete</p>
+                    </div>
+                </div>
+
+                <!-- Process Details Toggle -->
+                <div class="process-toggle" id="processToggle" style="display: none;">
+                    <button class="toggle-btn" id="toggleBtn">
+                        <i class="fas fa-chevron-down" id="toggleIcon"></i>
+                        <span id="toggleText">Show Process Details</span>
+                    </button>
+                </div>
+
+                <!-- Process Details -->
+                <div class="process-details" id="processDetails" style="display: none;">
+                    <h4><i class="fas fa-sparkles"></i> Analysis Process</h4>
+                    <div class="process-steps" id="processSteps">
+                        <!-- Steps will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Analyze Button -->
+                <div class="analyze-section" id="analyzeSection">
+                    <button class="analyze-btn" id="analyzeBtn">
+                        <i class="fas fa-shield-alt"></i>
+                        Analyze for Deepfakes
+                    </button>
+                    <p>Click to start the AI analysis process</p>
+                </div>
+
+                <!-- Results -->
+                <div class="results-section" id="resultsSection" style="display: none;">
+                    <div class="result-card" id="resultCard">
+                        <div class="result-content">
+                            <div class="result-icon" id="resultIcon"></div>
+                            <div>
+                                <p class="result-title" id="resultTitle"></p>
+                                <p class="result-confidence" id="resultConfidence"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="action-btn" id="analyzeAgainBtn">Analyze Again</button>
+                        <button class="action-btn" id="uploadNewBtn">Upload New Video</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sweet Alert Modal -->
+    <div class="modal-overlay" id="modalOverlay" style="display: none;">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-icon" id="modalIcon"></div>
+                <h3>Analysis Complete</h3>
+            </div>
+            <div class="modal-content">
+                <div class="modal-result" id="modalResult"></div>
+                <div class="modal-details" id="modalDetails"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn" id="modalCloseBtn">Got it!</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
